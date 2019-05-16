@@ -21,7 +21,8 @@ public:
     string longestPalindrome(const string& s) {
         if (s.empty()) return "";
         int pair[2] = {0};
-        for (size_t i = 0; i < s.length(); i++) {
+        // Optimization: pivot为尾部时，长度肯定为1，不需要处理
+        for (size_t i = 0; i < s.length() - 1; i++) {
             int right = 0, left = 0;
             i = lenOfPalindrome(s, i, &left, &right);
             if ((right - left) > pair[1] - pair[0]) {
