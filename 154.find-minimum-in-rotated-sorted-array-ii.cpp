@@ -4,12 +4,16 @@
  * [154] Find Minimum in Rotated Sorted Array II
  */
 class Solution {
-    int _findMin(vector<int>& nums, int l, int r) const {
+public:
+    int findMin(vector<int>& nums) {
+        if (nums.empty()) return 0;
+        int l = 0, r = nums.size() - 1;
         while (l < r) {
             int mid = l + (r - l) / 2;
             // Like [1,0,1,1,1,1] or [1,1,1,1,0,1]
             if (nums[mid] == nums[r] && nums[l] == nums[mid]) {
-                return min(_findMin(nums, l, mid), _findMin(nums, mid + 1, r));
+                ++l;
+                --r; 
             } else if (nums[mid] > nums[r]) {
                 l = mid + 1;
             } else {
@@ -17,11 +21,6 @@ class Solution {
             }
         }
         return nums[l];
-    }
-public:
-    int findMin(vector<int>& nums) {
-        if (nums.empty()) return 0;
-        return _findMin(nums, 0, nums.size() - 1);
     }
 };
 
