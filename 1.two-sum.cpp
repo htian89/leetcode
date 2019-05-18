@@ -6,26 +6,14 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        if (nums.size() < 2) return {};
-        multimap<int,int> n_map;
-        for (int i = 0; i < nums.size(); ++i)
+        unordered_map<int, size_t> n_map;
+        for (size_t i = 0; i < nums.size(); i++)
         {
-            n_map.insert(std::pair<int, int>(nums[i], i));
+            auto it = n_map.find(target - nums[i]);
+            if (it != n_map.end() && it->second != i) return {it->second, i};
+            n_map[nums[i]] = i;
         }
-        auto l = n_map.begin(), r = --(n_map.end());
-        while (l != r) {
-            int sum = l->first + r->first;
-            if (sum > target) {
-                --r;
-                continue;
-            }
-            if (sum < target) {
-                ++l;
-                continue;
-            }
-            return {l->second, r->second};
-        }
-        return {};
+        return {0,0};
     }
 };
 

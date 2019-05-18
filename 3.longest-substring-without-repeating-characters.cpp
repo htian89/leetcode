@@ -7,19 +7,17 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-       map<char, int> index_map;
-       int longest = 0;
-       for (int i = -1, j = 0; j < s.length() ; ++j) {
-         auto it = index_map.find(s[j]);
-         if (it != index_map.end()) {
-             i = it->second;
-             it->second = j;
-         } else {
-             index_map[s[j]] = j;
-         }
-         longest = MAX(longest, j - i);
-       } 
-       return longest;
+        int index[128] = {0};
+        int longest = 0;
+        for (int i = 0, j = 0; j < s.length(); ++j) {
+            int offset = s[j];
+            if (index[offset] != 0) {
+                i = i > index[offset] ? i : index[offset];
+            }
+            index[offset] = j + 1;
+            longest = MAX(longest, j - i + 1);
+        }
+        return longest;
     }
 };
 
