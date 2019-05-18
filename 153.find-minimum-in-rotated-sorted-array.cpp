@@ -6,19 +6,19 @@
 class Solution {
 public:
     int findMin(vector<int>& nums) {
+        if (nums.empty()) return 0;
         int l = 0, r = nums.size() - 1;
-        while (l <= r) {
-            if (l == r) return nums[l];
+        while (l < r) {
             int mid = l + (r - l) / 2;
-            if (min(nums[l], nums[mid]) > min(nums[mid + 1], nums[r])) {
-                if (nums[mid + 1] < nums[r]) return nums[mid + 1];
-                l = mid + 1;
-            } else {
-                if (nums[l] < nums[mid]) return nums[l];
+            // If the right side is ordered, the minimum 
+            // value must be on the left side.
+            if (nums[mid] < nums[r]) {
                 r = mid;
+            } else {
+                l = mid + 1;
             }
         }
-        return 0;
+        return nums[l];
     }
 };
 
