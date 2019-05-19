@@ -13,7 +13,7 @@ public:
                 || (x < 0 && (ret < INT32_MIN/10 || (ret == INT32_MIN/10 && num < -8)))) return 0;
             ret = ret * 10 + num;
             x = x/10;
-        }    
+        }
         return ret;
     }
 };

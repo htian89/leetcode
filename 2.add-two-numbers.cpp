@@ -16,7 +16,7 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
       int carry = 0;
       ListNode dummy_header(0);
-      ListNode* cur = &dummy_header;  
+      ListNode* cur = &dummy_header;
       while (l1 != nullptr || l2 != nullptr) {
         cur->next = new ListNode(carry);
         cur = cur->next;
